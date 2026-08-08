@@ -5,7 +5,7 @@ export default defineConfig({
   title: 'ArtPlayer Web API Docs',
   description: '自托管弹幕视频播放器 + Web 管理后台 官方文档',
   lang: 'zh-CN',
-  base: '/Artplayer-Web-Api-Docs/',
+  base: '/',
   cleanUrls: true,
   locales: {
     root: {
@@ -161,7 +161,7 @@ export default defineConfig({
     }
   },
   head: [
-    ['link', { rel: 'icon', href: '/Artplayer-Web-Api-Docs/logo.svg' }],
+    ['link', { rel: 'icon', href: '/logo.svg' }],
     ['meta', { name: 'theme-color', content: '#7c5cfc' }]
   ]
 })
