@@ -2,109 +2,114 @@
 
 `ctx` 是插件上下文对象，在 `apply(ctx, config)` 时注入。
 
-## ctx.name
+## 基础
 
-当前插件名称。
-
-## ctx.config
-
-当前插件配置（来自后台配置表单或 `data/plugins.json`，热重载时更新）。
+| 属性 | 说明 |
+| --- | --- |
+| `ctx.name` | 插件显示名 |
+| `ctx.config` | 当前插件配置（后台表单保存后热重载更新） |
+| `ctx.version` | 服务端版本号（如 `26.8.11`） |
+| `ctx.log(msg)` | 带插件名前缀的日志输出 |
 
 ## ctx.router
 
-Express app 代理。可注册路由与中间件：
+Express app 代理，注册路由与中间件：
 
 ```js
 ctx.router.get('/api/my-plugin', (req, res) => {
   res.json({ code: 0, data: 'hello' });
 });
-
 ctx.router.post('/api/my-plugin/hook', (req, res) => { ... });
 ctx.router.use('/api/my-plugin', middleware);
 ```
 
-支持：`get` / `post` / `put` / `delete` / `patch` / `use`。
-
-::: tip
-路由包装了实例校验：插件热重载后，旧实例注册的路由自动失效（不再响应）。
-:::
+支持 `get` / `post` / `put` / `delete` / `patch` / `use`。热重载后旧实例路由自动失效。
 
 ## ctx.store / ctx.model
 
-数据存储对象，提供全部数据操作（与后台 API 同源）：
+- `ctx.store`：数据存储（弹幕 / 视频 / 字幕 / kv 等，与后台同源）
+- `ctx.model`：**动态表**（Koishi 风格 `ctx.model.define`）：
 
 ```js
-const danmuList = await ctx.store.danmuAll();        // 全部弹幕
-await ctx.store.danmuAdd({ id, vid, text, ... });    // 新增弹幕
-const videos = await ctx.store.videosAll();          // 视频映射
-await ctx.store.videoSet(vid, url);
-const subs = await ctx.store.subtitleAll();
-await ctx.store.kvGet(key) / ctx.store.kvSet(key, value);
-await ctx.store.bannedAll(includeSubscriptions);
+const notes = ctx.model.define('my_notes', {
+  primary: 'id',
+  fields: { id: { type: 'string' }, text: { type: 'string' }, createdAt: { type: 'number' } }
+});
+await notes.create({ text: 'hello' });       // 无主键自动生成 id
+await notes.get(id);
+await notes.update(id, { text: 'new' });
+await notes.list({ page: 1, limit: 20, search: 'key', searchKey: 'text' });
+await notes.remove(id);
+await notes.count(); await notes.all(); await notes.clear();
 ```
 
-## ctx.getServerConfig()
+表数据随主存储（JSON/SQLite/MySQL/PG/MongoDB）**切换自动迁移**。
 
-读取服务器配置（`data/config.json`）：
+## ctx.app（服务控制）
 
 ```js
-const cfg = ctx.getServerConfig();
-if (cfg.pow.enabled) { ... }
+ctx.app.version            // 服务端版本
+ctx.app.pid                // 进程 PID
+ctx.app.platform           // 平台（如 win32 x64）
+ctx.app.uptime()           // 运行秒数
+ctx.app.getConfig()        // 读取服务器配置
+ctx.app.saveConfig(patch)  // 保存配置（合并 + 应用 trustProxy 等）
+ctx.app.restart({ delay: 1500 })  // 优雅重启（广播 before:restart → 新进程等待端口 → 退出）
 ```
+
+## ctx.logger（分级日志）
+
+```js
+ctx.logger.debug('scope', 'msg');
+ctx.logger.info('scope', 'msg');
+ctx.logger.warn('scope', 'msg');
+ctx.logger.error('scope', 'msg');
+ctx.logger.tail(200);      // 读取环形缓冲（后台 /api/admin/plugins/logs 可见）
+```
+
+日志是调试工具的数据源：后台「插件管理 → 插件日志」接口 `GET /api/admin/plugins/logs`。
 
 ## ctx.http
 
 fetch 封装（带超时与 JSON 解析）：
 
 ```js
-const res = await ctx.http.get('https://example.com/api');   // Response
-const data = await ctx.http.json('https://example.com/api'); // 已解析 JSON（失败返回 null）
+const res = await ctx.http.get('https://example.com/api');
+const data = await ctx.http.json('https://example.com/api');
 const r2 = await ctx.http.post('https://example.com/hook', { hello: 1 });
 ```
 
-## ctx.log(msg)
-
-带插件名前缀的日志输出：
+## ctx.on / ctx.emit（事件总线）
 
 ```js
-ctx.log('处理完成');  // → [插件] [my-plugin] 处理完成
+ctx.on('danmaku:send', (danmu) => { ... });   // 内置事件
+ctx.on('ready', () => { ... });
+ctx.on('before:restart', () => { ... });
+ctx.on('dispose', () => { clearInterval(timer); });   // 卸载清理
+ctx.on('my:event', (payload) => { ... });      // 自定义事件
+ctx.emit('my:event', { hello: 1 });            // 同步广播
 ```
 
-## ctx.on(event, fn)
+卸载时自动清理该插件注册的全部事件监听。
 
-事件订阅，返回原函数（便于链式）：
+## ctx.provide / ctx.service（服务层）
 
 ```js
-// 订阅内置事件
-ctx.on('danmu:send', (danmu) => { ... });
+// 提供服务（其他插件可在 manifest.inject 声明依赖）
+ctx.provide('stats', { get: () => ({ ... }) });
 
-// 订阅自定义事件（其他插件 ctx.emit 广播）
-ctx.on('my:event', (payload) => { ... });
-
-// 卸载清理回调（dispose）
-ctx.on('dispose', () => {
-  clearInterval(timer);
-});
+// 获取服务
+const stats = ctx.service('stats');
 ```
 
-卸载插件时，该插件注册的全部事件监听自动清理。
+- 内置服务：`store` / `model` / `app` / `logger` / `http` / `router`
+- manifest 中 `inject` 声明的服务会**直接挂到 ctx 上**：`ctx.app`、`ctx.logger`、`ctx.stats`...
+- 依赖提供者按拓扑序自动先加载；服务缺失时加载失败并给出明确错误
 
-## ctx.emit(event, ...args)
-
-同步广播事件给所有插件：
-
-```js
-ctx.emit('my:event', { hello: 1 });
-```
-
-## ctx.plugin(plugin, config)
+## ctx.plugin
 
 嵌套加载子插件（同步调用 `apply(ctx, cfg)`）：
 
 ```js
 ctx.plugin(require('./sub-plugin'), { interval: 5 });
 ```
-
-## ctx.version
-
-服务端版本号字符串（如 `26.8.11`）。

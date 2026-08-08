@@ -1,41 +1,55 @@
 # 插件市场
 
-插件市场是官方维护的插件索引（`plugin-registry.json`，位于主仓库根目录）。后台「插件管理 → 插件市场」拉取该清单并展示可安装插件。
+插件市场是官方维护的插件索引（`plugin-registry.json`，位于主仓库根目录）。后台「插件管理 → 插件市场」拉取清单并展示，**安装走 npm**（支持指定版本）。
 
-## 使用方式
-
-1. 后台打开「插件管理」→「插件市场」
-2. 点击「刷新」从 GitHub 拉取最新清单（缓存 10 分钟）
-3. 点击目标插件「安装」按钮（本质是 URL 安装）
-4. 安装后在「插件列表」中启用
-
-## 提交插件到市场
-
-如果你想把自己的插件加入官方市场：
-
-1. 将插件代码发布到 GitHub（raw 链接可访问）
-2. 向 [Artplayer-Web-Api 仓库](https://github.com/yangyang8002/Artplayer-Web-Api) 提交 PR，在 `plugin-registry.json` 中添加条目：
+## Registry 格式（v2：版本 + 依赖）
 
 ```json
 {
-  "name": "my-plugin",
-  "version": "1.0.0",
-  "description": "插件描述",
-  "author": "你的名字",
-  "homepage": "https://github.com/you/my-plugin",
-  "tags": ["工具", "示例"],
-  "url": "https://raw.githubusercontent.com/you/my-plugin/main/my-plugin.js"
+  "updated": "2026-08-08",
+  "plugins": [
+    {
+      "name": "openvideo-plugin-demo",
+      "description": "官方示例插件",
+      "author": "yangyang8002",
+      "homepage": "https://github.com/yangyang8002/OpenVideoAPI",
+      "tags": ["官方", "示例"],
+      "versions": ["1.0.0"],
+      "dependencies": []
+    }
+  ]
 }
 ```
 
-## 市场机制
+| 字段 | 说明 |
+| --- | --- |
+| `name` | npm 包名（后台按该名称 `npm install`） |
+| `versions` | 可用版本列表（**降序，首个为最新**），后台可下拉选择 |
+| `dependencies` | 依赖的其他插件包名（安装时提示，加载时按拓扑序） |
 
-- 市场清单通过 `GET /api/admin/plugins/market` 从 `raw.githubusercontent.com` 拉取
-- 已安装的插件会在列表中标记「已安装」
-- 市场更新由仓库维护者发布，与版本发布同步
+## 使用方式
+
+1. 后台「插件管理 → 插件市场」→「刷新」
+2. 选择目标插件版本 →「安装」（后台执行 `npm install <name>@<version>`）
+3. 安装后在「插件列表」中启用
+
+## Registry 地址可配置
+
+`data/config.json`：
+
+```json
+{ "plugin": { "registry": "https://你的镜像或自建/plugin-registry.json" } }
+```
+
+或环境变量 `OPENVIDEO_PLUGIN_REGISTRY`。默认指向官方仓库。
+
+## 提交插件到市场
+
+1. 将插件发布为 npm 包（遵循 [插件指南](/plugins/guide) 的 manifest 约定）
+2. 向 [OpenVideoAPI 仓库](https://github.com/yangyang8002/OpenVideoAPI) 提交 PR，在 `plugin-registry.json` 中添加条目（含版本与依赖）
 
 ## 插件托管建议
 
-- **单文件插件**：直接放仓库根目录或 `plugins/` 下，使用 raw 链接
-- **npm 插件**：发布到 npm registry，市场条目填写包名（后台安装时选择 npm 方式）
-- 插件遵循 [插件指南](/plugins/guide) 的导出约定即可被系统识别
+- 插件**必须**为 npm 包（本地开发可先 `npm install <本地路径>` 放入 `plugins/`）
+- 包名建议以 `openvideo-plugin-` 开头，便于识别与搜索
+- 前端资源放在包内 `lib/client/` 下，由 `/api/plugins/client/*` 注入，**无需打包构建**

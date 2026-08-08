@@ -1,17 +1,18 @@
 # Config Schema
 
-Export a `schema` array to get an auto-generated config form in the admin panel. Saving hot-reloads the plugin.
+Declare config fields in the `openvideoPlugin.schema` array; the admin renders a form automatically and saving hot-reloads the plugin.
 
-```js
-module.exports = {
-  schema: [
-    { key: 'interval',  label: 'Interval (sec)', type: 'number', default: 60, hint: 'Timer interval' },
-    { key: 'verbose',   label: 'Verbose', type: 'boolean', default: true },
-    { key: 'level',     label: 'Level', type: 'select', default: 'info',
-      options: [ { value: 'debug', label: 'Debug' }, { value: 'info', label: 'Info' } ] },
-    { key: 'message',   label: 'Message', type: 'textarea', default: 'Hello' }
-  ],
-  apply(ctx, config) { ... }
+```json
+{
+  "openvideoPlugin": {
+    "schema": [
+      { "key": "interval",  "label": "Interval (sec)", "type": "number", "default": 60, "hint": "Timer interval" },
+      { "key": "verbose",   "label": "Verbose", "type": "boolean", "default": true },
+      { "key": "level",     "label": "Level", "type": "select", "default": "info",
+        "options": [ { "value": "debug", "label": "Debug" }, { "value": "info", "label": "Info" } ] },
+      { "key": "message",   "label": "Message", "type": "textarea", "default": "Hello" }
+    ]
+  }
 }
 ```
 
@@ -28,10 +29,10 @@ module.exports = {
 
 ## Reading Config
 
-`config` in `apply(ctx, config)` is the merged config; `ctx.config` also gives runtime access.
+`config` in `apply(ctx, config)` is the merged config; `ctx.config` gives runtime access.
 
 ## Notes
 
 - Config persists in `data/plugins.json` per plugin
-- Saving hot-reloads the plugin with the new config
-- Without a schema, no "Config" button is shown (config can still be set via API)
+- Saving hot-reloads the plugin
+- Without a schema, no "Config" button is shown
