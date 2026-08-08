@@ -1,4 +1,4 @@
-# https://vitepress.dev/reference/default-theme-config
+// https://vitepress.dev/reference/default-theme-config
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
