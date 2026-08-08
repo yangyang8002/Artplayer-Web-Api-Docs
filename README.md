@@ -8,7 +8,7 @@
 
 English | [中文](README.cn.md)
 
-- 在线文档：<https://yangyang8002.github.io/Artplayer-Web-Api-Docs/>
+- 在线文档：<https://doc.mbps.top/>
 - 主仓库：<https://github.com/yangyang8002/Artplayer-Web-Api>
 
 ## 本地开发

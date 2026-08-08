@@ -4,7 +4,7 @@ Official documentation site for [ArtPlayer Web API](https://github.com/yangyang8
 
 English | [中文](README.cn.md)
 
-- Live docs: <https://yangyang8002.github.io/Artplayer-Web-Api-Docs/>
+- Live docs: <https://doc.mbps.top/>
 - Main repo: <https://github.com/yangyang8002/Artplayer-Web-Api>
 
 ## Local Development
