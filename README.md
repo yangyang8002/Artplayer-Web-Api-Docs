@@ -4,12 +4,12 @@
 
 # ArtPlayer Web API 文档
 
-[ArtPlayer Web API](https://github.com/yangyang8002/Artplayer-Web-Api) 官方文档网站 —— 基于 [VitePress](https://vitepress.dev) 构建，支持中英双语。
+[ArtPlayer Web API](https://github.com/yangyang8002/OpenVideoAPI) 官方文档网站 —— 基于 [VitePress](https://vitepress.dev) 构建，支持中英双语。
 
 English | [中文](README.cn.md)
 
 - 在线文档：<https://doc.mbps.top/>
-- 主仓库：<https://github.com/yangyang8002/Artplayer-Web-Api>
+- 主仓库：<https://github.com/yangyang8002/OpenVideoAPI>
 
 ## 本地开发
 

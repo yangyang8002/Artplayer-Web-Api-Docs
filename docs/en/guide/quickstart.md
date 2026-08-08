@@ -11,7 +11,7 @@ npm install -g artplayer-web-api
 artplayer-web-api
 
 # or from source
-git clone https://github.com/yangyang8002/Artplayer-Web-Api.git
+git clone https://github.com/yangyang8002/OpenVideoAPI.git
 cd Artplayer-Web-Api
 npm install
 npm start

@@ -12,7 +12,7 @@ npm install -g artplayer-web-api
 artplayer-web-api
 
 # 或克隆仓库运行
-git clone https://github.com/yangyang8002/Artplayer-Web-Api.git
+git clone https://github.com/yangyang8002/OpenVideoAPI.git
 cd Artplayer-Web-Api
 npm install
 npm start

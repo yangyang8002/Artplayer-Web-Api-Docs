@@ -17,7 +17,7 @@ hero:
       link: /en/plugins/guide
     - theme: alt
       text: GitHub
-      link: https://github.com/yangyang8002/Artplayer-Web-Api
+      link: https://github.com/yangyang8002/OpenVideoAPI
 
 features:
   - icon: 🎬

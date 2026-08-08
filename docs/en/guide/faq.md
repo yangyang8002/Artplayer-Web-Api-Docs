@@ -45,5 +45,5 @@ mp4 (native), m3u8 (hls.js), flv (flv.js).
 
 ## Issues / Contribution
 
-- Issues: https://github.com/yangyang8002/Artplayer-Web-Api/issues
-- Docs repo: https://github.com/yangyang8002/Artplayer-Web-Api-Docs
+- Issues: https://github.com/yangyang8002/OpenVideoAPI/issues
+- Docs repo: https://github.com/yangyang8002/OpenVideoAPI-Docs

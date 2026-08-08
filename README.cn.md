@@ -1,11 +1,11 @@
 # ArtPlayer Web API Docs
 
-Official documentation site for [ArtPlayer Web API](https://github.com/yangyang8002/Artplayer-Web-Api) — built with [VitePress](https://vitepress.dev), bilingual (zh/en).
+Official documentation site for [ArtPlayer Web API](https://github.com/yangyang8002/OpenVideoAPI) — built with [VitePress](https://vitepress.dev), bilingual (zh/en).
 
 English | [中文](README.cn.md)
 
 - Live docs: <https://doc.mbps.top/>
-- Main repo: <https://github.com/yangyang8002/Artplayer-Web-Api>
+- Main repo: <https://github.com/yangyang8002/OpenVideoAPI>
 
 ## Local Development
 

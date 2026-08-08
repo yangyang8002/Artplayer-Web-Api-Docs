@@ -55,5 +55,5 @@ mp4（原生）、m3u8（hls.js）、flv（flv.js）。浏览器不支持的解�
 
 ## 如何贡献 / 报告问题？
 
-- GitHub Issues: https://github.com/yangyang8002/Artplayer-Web-Api/issues
-- 文档仓库: https://github.com/yangyang8002/Artplayer-Web-Api-Docs
+- GitHub Issues: https://github.com/yangyang8002/OpenVideoAPI/issues
+- 文档仓库: https://github.com/yangyang8002/OpenVideoAPI-Docs
