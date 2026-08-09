@@ -1,70 +1,67 @@
-# 插件指南
+# 插件开发指南
 
-插件系统参考 **Koishi** 设计：插件是一个 **npm 包**，包内 `main` 导出 `apply(ctx, config)`（函数 / 类 / 带 `apply` 的对象），加载时框架调用 `apply(ctx, config)`。`ctx` 注入服务、路由、数据模型与事件总线。
+插件系统参考 [Koishi](https://koishi.chat/zh-CN/guide/plugin/) 的设计：**插件是一个 npm 包**，包内 `main` 导出 `apply(ctx, config)`，加载时框架调用它，`ctx` 注入路由、服务、数据模型与事件总线。
 
-## 最小插件（npm 包）
+## 与 Koishi 的对应关系
+
+| Koishi 概念 | OpenVideoAPI 对应 |
+| --- | --- |
+| `ctx.plugin(plugin, config)` | 同：嵌套插件 |
+| `ctx.model.define`（数据表） | `ctx.model.define`（动态表） |
+| `ctx.provide`（服务注册） | 同 |
+| `inject`（依赖注入） | 同：`openvideoPlugin.inject` |
+| `ctx.on / ctx.emit`（事件） | 同：`danmu:send` / `ready` / `dispose` / `before:restart` |
+| `schema`（配置表单） | 同：`openvideoPlugin.schema` |
+| 控制台插件（前端 UI） | `client.admin.tabs`（后台 tab）+ `client.player`（播放器扩展/替换） |
+| 插件市场（registry） | `plugin-registry.json`（版本 + 依赖） |
+| 插件模板 / 脚手架 | [OpenVideoAPI-Dev](https://github.com/yangyang8002/OpenVideoAPI-Dev) `npm run new` |
+
+## 环境准备（推荐：Dev 仓库）
+
+开发插件**不需要**本地部署完整服务——使用官方开发环境：
+
+```bash
+git clone https://github.com/yangyang8002/OpenVideoAPI-Dev.git
+cd OpenVideoAPI-Dev
+npm run setup          # 克隆服务端 + 安装依赖
+npm run dev            # 启动开发服务器（端口 1920）→ http://localhost:1920/admin/
+npm run new hello      # 生成插件骨架 plugins/openvideo-plugin-hello/
+```
+
+开发环境特性：**改文件自动热重载**（无需重启）、数据/插件目录与生产隔离、本地插件市场（`file://` 源）。详见 [插件开发环境](/guide/dev)。
+
+也可以手动搭建：克隆 [OpenVideoAPI](https://github.com/yangyang8002/OpenVideoAPI) 主仓库，把插件包放入 `plugins/` 目录（会自动发现），或用 `npm install <包名>` 安装到 `plugins/node_modules/`。
+
+## 插件基本结构
 
 ```
-my-plugin/
-├── package.json
+openvideo-plugin-hello/
+├── package.json                 # npm 包清单 + openvideoPlugin 声明
 └── lib/
-    └── index.js
+    ├── index.js                 # apply(ctx, config) 入口
+    └── client/                  # 前端扩展（可选）
+        ├── admin/panel.js       # 后台 tab 脚本
+        └── player/hook.js       # 播放器脚本
 ```
+
+### package.json 与 manifest
 
 ```json
 {
-  "name": "openvideo-plugin-my-plugin",
+  "name": "openvideo-plugin-hello",
   "version": "1.0.0",
   "main": "lib/index.js",
   "openvideoPlugin": {
-    "name": "my-plugin",
+    "name": "hello",
     "description": "我的第一个插件",
-    "inject": ["store", "app", "logger"]
-  }
-}
-```
-
-```js
-module.exports = {
-  apply(ctx, config) {
-    ctx.logger.info('my-plugin', '插件已加载，服务端 ' + ctx.version);
-  }
-}
-```
-
-后台「插件管理」输入 npm 包名安装（可指定版本），启用后生效。
-
-## 插件形式
-
-```js
-// 1. 函数
-module.exports = function (ctx, config) { ... }
-
-// 2. 类（constructor(ctx, config)）
-module.exports = class MyPlugin {
-  constructor(ctx, config) { ... }
-}
-
-// 3. 带 apply 的对象（推荐：配合 manifest 声明能力）
-module.exports = {
-  name: 'demo', version: '1.0.0', description: '...',
-  apply(ctx, config) { ... }
-}
-```
-
-## 包 manifest（package.json 的 openvideoPlugin 字段）
-
-```json
-{
-  "openvideoPlugin": {
-    "name": "demo",
-    "description": "展示用描述",
     "inject": ["store", "model", "app", "logger", "http"],
-    "provide": ["stats"],
-    "schema": [ ... ],
+    "provide": ["helloStats"],
+    "schema": [
+      { "key": "greeting", "label": "欢迎语", "type": "string", "default": "Hello" }
+    ],
     "client": {
-      "admin": { "styles": [], "scripts": ["lib/client/admin/debug.js"], "tabs": [{ "id": "debug", "title": "调试" }] },
-      "player": { "styles": [], "scripts": ["lib/client/player/overlay.js"], "replaces": false }
+      "admin": { "scripts": ["lib/client/admin/panel.js"], "tabs": [{ "id": "hello", "title": "hello" }] },
+      "player": { "scripts": ["lib/client/player/hook.js"], "replaces": false }
     }
   }
 }
@@ -72,49 +69,51 @@ module.exports = {
 
 | 字段 | 说明 |
 | --- | --- |
-| `name` / `description` | 展示用元数据（缺省取包名/描述） |
-| `inject` | 依赖的服务名数组，加载时自动按拓扑序先加载提供者 |
-| `provide` | 本插件提供的服务名（配合 `ctx.provide(name, svc)` 注册） |
-| `schema` | 配置表单定义（见 [配置 Schema](/plugins/schema)） |
-| `client.admin` | 后台前端扩展：样式 / 脚本 / tab 列表 |
-| `client.player` | 播放器前端扩展：样式 / 脚本 / 是否替换播放器 |
+| `name` / `description` | 后台展示用元数据 |
+| `inject` | 依赖的服务名数组；依赖提供者自动按拓扑序先加载 |
+| `provide` | 本插件提供的服务名（配合 `ctx.provide` 注册） |
+| `schema` | 配置表单（见 [配置 Schema](/plugins/schema)） |
+| `client` | 前端扩展声明（见 [前端扩展](/plugins/client)） |
 
-## 编写并发布
+### 入口（三种导出形式）
 
-1. 按上述结构创建 npm 包，本地 `npm pack` 验证
-2. 发布到 npm registry（或先 `npm install <本地路径>` 测试）
-3. 后台安装：`npm 包名` 或 `npm 包名@版本`
-4. 提交到官方市场（可选）：向主仓库提交 PR，在 `plugin-registry.json` 登记版本与依赖
+```js
+// 1. 函数插件（Koishi 经典写法）
+module.exports = function (ctx, config) {
+  ctx.logger.info('hello', '加载成功');
+};
+
+// 2. 类插件（constructor(ctx, config)）
+module.exports = class HelloPlugin {
+  constructor(ctx, config) {
+    ctx.router.get('/api/plugin/hello', (req, res) => res.json({ code: 0, data: 'hi' }));
+  }
+};
+
+// 3. 带 apply 的对象（推荐：结构与 manifest 呼应）
+module.exports = {
+  name: 'hello', version: '1.0.0', description: '...',
+  apply(ctx, config) { ... }
+};
+```
 
 ## 生命周期
 
-- **加载**：启用（或服务启动）时按依赖拓扑序调用 `apply(ctx, config)`；热重载先卸载旧实例
-- **运行**：注册的路由、事件、定时器正常工作；`ctx.provide` 注册的服务对其他插件可用
-- **卸载**：触发 `dispose` 回调（清理定时器、连接），事件监听自动清理，旧路由自动失效
-- **重启**：`ctx.app.restart()` 优雅重启（先广播 `before:restart`，新进程等待端口释放）
+| 阶段 | 触发 | 说明 |
+| --- | --- | --- |
+| 加载 | 启用插件 / 服务启动 | 按依赖拓扑序调用 `apply(ctx, config)`；热重载先卸载旧实例 |
+| 就绪 | 全部启用插件加载完成 | `ctx.on('ready', fn)` |
+| 运行 | — | 路由 / 事件 / 定时器正常工作；`ctx.provide` 的服务对其他插件可用 |
+| 重启 | `ctx.app.restart()` | 先广播 `ctx.on('before:restart', fn)`，新进程等待端口释放后接管 |
+| 卸载 | 停用 / 热重载 / 卸载 | `ctx.on('dispose', fn)` 清理定时器与连接；事件监听自动移除，旧路由自动失效 |
 
-## 内置事件
+**热重载**：Dev 环境下修改 `lib/` 任意 `.js/.json` 自动触发「卸载 → 重载」；后台修改配置同样热重载。
 
-```js
-ctx.on('danmaku:send', (danmu) => { /* { vid, text, color, type, time, author } */ });
-ctx.on('ready', () => { /* 全部启用插件加载完成 */ });
-ctx.on('before:restart', () => { /* 重启前清理 */ });
-```
+## 下一步
 
-## 前端扩展
-
-- **后台 tab**：`OpenVideoAdmin.registerTab({ id, title, mount(el) })`，自动出现在侧边栏（`OpenVideoAdmin.api(url)` 自动携带管理员鉴权）
-- **播放器替换**：`OpenVideoPlayer.replace({ name, init(ctx) })` 完全接管播放区渲染
-- **播放器钩子**：`OpenVideoPlayer.onReady(fn)`、`ctx.on('video:load', fn)`
-
-详见 [ctx API](/plugins/ctx) 与 [配置 Schema](/plugins/schema)。
-
-## 安全约定
-
-- 插件运行在服务进程内，**拥有与服务器相同的权限**，请勿安装来源不明的插件
-- 插件异常不会导致服务崩溃（加载失败标记为 error 并显示原因）
-- 事件处理器异常被捕获并记录，不影响其他插件
-
-## 示例
-
-仓库内置 `plugins/openvideo-plugin-demo`：演示服务提供、动态表、事件总线、日志、后台调试 tab 与播放器浮层。
+- [ctx API 参考](/plugins/ctx) — 完整 API
+- [服务层](/plugins/services) — 插件间协作
+- [数据模型](/plugins/model) — 持久化
+- [前端扩展](/plugins/client) — 后台 tab / 播放器
+- [配置 Schema](/plugins/schema)
+- [发布与市场](/plugins/market)

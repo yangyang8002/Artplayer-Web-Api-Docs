@@ -69,10 +69,13 @@ export default defineConfig({
             {
               text: '插件系统',
               items: [
-                { text: '插件指南', link: '/plugins/guide' },
+                { text: '插件开发指南', link: '/plugins/guide' },
                 { text: 'ctx API 参考', link: '/plugins/ctx' },
+                { text: '服务层', link: '/plugins/services' },
+                { text: '数据模型', link: '/plugins/model' },
+                { text: '前端扩展', link: '/plugins/client' },
                 { text: '配置 Schema', link: '/plugins/schema' },
-                { text: '插件市场', link: '/plugins/market' }
+                { text: '发布与市场', link: '/plugins/market' }
               ]
             }
           ]
@@ -145,8 +148,11 @@ export default defineConfig({
               items: [
                 { text: 'Plugin Guide', link: '/en/plugins/guide' },
                 { text: 'ctx API', link: '/en/plugins/ctx' },
+                { text: 'Services', link: '/en/plugins/services' },
+                { text: 'Data Model', link: '/en/plugins/model' },
+                { text: 'Client Extensions', link: '/en/plugins/client' },
                 { text: 'Config Schema', link: '/en/plugins/schema' },
-                { text: 'Marketplace', link: '/en/plugins/market' }
+                { text: 'Publishing & Market', link: '/en/plugins/market' }
               ]
             }
           ]
