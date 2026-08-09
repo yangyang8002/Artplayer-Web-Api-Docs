@@ -3,13 +3,13 @@
 ## 快速开始
 
 ```bash
-docker pull yangyang8002/artplayer-web-api:latest
+docker pull yangyang8002/open-video-api:latest
 docker run -d \
   --name artplayer \
   -p 1919:1919 \
   -v /path/to/data:/app/data \
   --restart unless-stopped \
-  yangyang8002/artplayer-web-api:latest
+  yangyang8002/open-video-api:latest
 ```
 
 - 数据目录挂载到宿主机的 `/path/to/data`（弹幕、视频映射、配置、数据库文件均在此）
@@ -21,7 +21,7 @@ docker run -d \
 version: "3"
 services:
   artplayer:
-    image: yangyang8002/artplayer-web-api:latest
+    image: yangyang8002/open-video-api:latest
     container_name: artplayer
     ports:
       - "1919:1919"
@@ -38,12 +38,12 @@ services:
 | `26.8.11` | 指定版本（tag 与 npm 包版本一致） |
 | `26.8.x` | 大版本系列 |
 
-> 国内加速镜像：`fast.fumor.top/yangyang8002/artplayer-web-api`（快速通道）、`ghcr.nju.edu.cn/yangyang8002/artplayer-web-api`（NJU 镜像）
+> 国内加速镜像：`fast.fumor.top/yangyang8002/open-video-api`（快速通道）、`ghcr.nju.edu.cn/yangyang8002/open-video-api`（NJU 镜像）
 
 ## 更新 Docker 部署
 
 ```bash
-docker pull yangyang8002/artplayer-web-api:latest
+docker pull yangyang8002/open-video-api:latest
 docker compose up -d
 ```
 

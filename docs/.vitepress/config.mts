@@ -29,6 +29,7 @@ export default defineConfig({
               items: [
                 { text: '快速开始', link: '/guide/quickstart' },
                 { text: '播放器使用', link: '/guide/player' },
+                { text: '插件开发环境', link: '/guide/dev' },
                 { text: 'Docker 部署', link: '/guide/docker' },
                 { text: '系统更新', link: '/guide/update' },
                 { text: '常见问题 (FAQ)', link: '/guide/faq' }
@@ -107,6 +108,7 @@ export default defineConfig({
               items: [
                 { text: 'Quick Start', link: '/en/guide/quickstart' },
                 { text: 'Player', link: '/en/guide/player' },
+                { text: 'Plugin Dev Env', link: '/en/guide/dev' },
                 { text: 'Docker', link: '/en/guide/docker' },
                 { text: 'Update', link: '/en/guide/update' },
                 { text: 'FAQ', link: '/en/guide/faq' }

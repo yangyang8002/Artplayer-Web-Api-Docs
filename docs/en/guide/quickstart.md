@@ -7,12 +7,12 @@ ArtPlayer Web API is a self-hosted, zero-build danmaku video player with a web a
 ## Option 1: npm
 
 ```bash
-npm install -g artplayer-web-api
-artplayer-web-api
+npm install -g open-video-api
+open-video-api
 
 # or from source
 git clone https://github.com/yangyang8002/OpenVideoAPI.git
-cd Artplayer-Web-Api
+cd OpenVideoAPI
 npm install
 npm start
 ```
@@ -22,8 +22,8 @@ The service listens on `http://localhost:1919` by default.
 ## Option 2: Docker
 
 ```bash
-docker pull yangyang8002/artplayer-web-api:latest
-docker run -d -p 1919:1919 -v ./data:/app/data yangyang8002/artplayer-web-api:latest
+docker pull yangyang8002/open-video-api:latest
+docker run -d -p 1919:1919 -v ./data:/app/data yangyang8002/open-video-api:latest
 ```
 
 See [Docker](/en/guide/docker) for details.

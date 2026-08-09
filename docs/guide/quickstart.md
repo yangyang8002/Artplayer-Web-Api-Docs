@@ -8,12 +8,12 @@ ArtPlayer Web API 是一个自托管、零构建的弹幕视频播放器 + Web �
 
 ```bash
 # 全局安装（可作系统服务运行）
-npm install -g artplayer-web-api
-artplayer-web-api
+npm install -g open-video-api
+open-video-api
 
 # 或克隆仓库运行
 git clone https://github.com/yangyang8002/OpenVideoAPI.git
-cd Artplayer-Web-Api
+cd OpenVideoAPI
 npm install
 npm start
 ```
@@ -23,8 +23,8 @@ npm start
 ## 方式二：Docker
 
 ```bash
-docker pull yangyang8002/artplayer-web-api:latest
-docker run -d -p 1919:1919 -v ./data:/app/data yangyang8002/artplayer-web-api:latest
+docker pull yangyang8002/open-video-api:latest
+docker run -d -p 1919:1919 -v ./data:/app/data yangyang8002/open-video-api:latest
 ```
 
 或使用 docker-compose，详见 [Docker 部署](/guide/docker)。

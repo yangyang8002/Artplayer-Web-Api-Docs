@@ -3,13 +3,13 @@
 ## Quick Start
 
 ```bash
-docker pull yangyang8002/artplayer-web-api:latest
+docker pull yangyang8002/open-video-api:latest
 docker run -d \
   --name artplayer \
   -p 1919:1919 \
   -v /path/to/data:/app/data \
   --restart unless-stopped \
-  yangyang8002/artplayer-web-api:latest
+  yangyang8002/open-video-api:latest
 ```
 
 ## docker-compose
@@ -18,7 +18,7 @@ docker run -d \
 version: "3"
 services:
   artplayer:
-    image: yangyang8002/artplayer-web-api:latest
+    image: yangyang8002/open-video-api:latest
     ports:
       - "1919:1919"
     volumes:
@@ -33,12 +33,12 @@ services:
 | `latest` | latest version |
 | `26.8.11` | pinned version (matches npm package version) |
 
-> China mirrors: `fast.fumor.top/yangyang8002/artplayer-web-api`, `ghcr.nju.edu.cn/yangyang8002/artplayer-web-api`
+> China mirrors: `fast.fumor.top/yangyang8002/open-video-api`, `ghcr.nju.edu.cn/yangyang8002/open-video-api`
 
 ## Updating
 
 ```bash
-docker pull yangyang8002/artplayer-web-api:latest
+docker pull yangyang8002/open-video-api:latest
 docker compose up -d
 ```
 
