@@ -1,6 +1,6 @@
 # Services
 
-Services let plugins cooperate (Koishi's Service model). The framework provides built-in services; plugins can **provide** services to others (`provide`) and **consume** them via `inject`.
+Services let plugins cooperate (the framework's Service model). The framework provides built-in services; plugins can **provide** services to others (`provide`) and **consume** them via `inject`.
 
 ## Built-in Services
 
@@ -23,7 +23,7 @@ apply(ctx, config) {
 
 ## Providing Services
 
-Plugin A provides; plugin B declares the dependency (Koishi `ctx.provide`):
+Plugin A provides; plugin B declares the dependency (插件框架 `ctx.provide`):
 
 ```js
 // Plugin A: openvideo-plugin-stats
@@ -61,9 +61,9 @@ const s = ctx.service('danmuStats');
 if (s) s.count();
 ```
 
-## Koishi Mapping
+## Framework Mapping
 
-| Koishi | OpenVideoAPI |
+| 插件框架 | OpenVideoAPI |
 | --- | --- |
 | `ctx.provide('name', service)` | same |
 | `inject: ['service']` | same (manifest.inject) |

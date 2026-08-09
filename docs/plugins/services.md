@@ -1,6 +1,6 @@
 # 服务层
 
-服务是插件间协作的桥梁（对应 Koishi 的 Service）。框架内置一组服务，插件可以**提供服务给其他插件**（`provide`），也可以**声明依赖消费服务**（`inject`）。
+服务是插件间协作的桥梁（对应 Service）。框架内置一组服务，插件可以**提供服务给其他插件**（`provide`），也可以**声明依赖消费服务**（`inject`）。
 
 ## 内置服务
 
@@ -28,7 +28,7 @@ apply(ctx, config) {
 
 ## 提供服务
 
-插件 A 注册服务，插件 B 声明依赖即可使用（对应 Koishi 的 `ctx.provide`）：
+插件 A 注册服务，插件 B 声明依赖即可使用（对应 插件框架的 `ctx.provide`）：
 
 ```js
 // 插件 A：openvideo-plugin-stats
@@ -73,9 +73,9 @@ const s = ctx.service('danmuStats');
 if (s) s.count();
 ```
 
-## 与 Koishi 的对应
+## 与插件框架的对应
 
-| Koishi | OpenVideoAPI |
+| 插件框架 | OpenVideoAPI |
 | --- | --- |
 | `ctx.provide('name', service)` | 同 |
 | `inject: ['service']` | 同（manifest.inject） |

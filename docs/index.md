@@ -31,7 +31,7 @@ features:
     details: JSON / SQLite / MySQL / MariaDB / PostgreSQL / MongoDB 自由切换，数据自动迁移
   - icon: 🧩
     title: 插件系统
-    details: Koishi 风格插件，支持上传 / URL / npm 安装，ctx 注入路由、存储、事件总线
+    details: 模块化插件，支持上传 / URL / npm 安装，ctx 注入路由、存储、事件总线
   - icon: 🌐
     title: 多语言
     details: 后台与播放器支持简体中文、繁體中文、文言、English、日本語、Français 六种语言

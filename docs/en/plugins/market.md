@@ -1,6 +1,6 @@
 # Publishing & Marketplace
 
-After developing in the [Dev environment](/en/guide/dev) and verifying, publish your plugin to npm and register it on the official marketplace (Koishi's plugin market).
+After developing in the [Dev environment](/en/guide/dev) and verifying, publish your plugin to npm and register it on the official marketplace (the framework's plugin market).
 
 ## Publish to npm
 
@@ -50,11 +50,11 @@ Admin "Dependencies → Update & install config":
 - **npm mirror**: `plugin.npmRegistry` (or `OPENVIDEO_NPM_REGISTRY` env) — applies to market installs / plugin updates / dependency updates / app updates
 - **Plugin registry URL**: `plugin.registry` (or `OPENVIDEO_PLUGIN_REGISTRY`) — `https://` or local `file://` (Dev environment)
 
-## Koishi Mapping
+## Framework Mapping
 
-| Koishi | OpenVideoAPI |
+| 插件框架 | OpenVideoAPI |
 | --- | --- |
-| `koishi-plugin-*` naming | `openvideo-plugin-*` naming |
-| Koishi marketplace | official `plugin-registry.json` (versions + dependencies) |
-| `koishi add` | admin "Plugins → Market" |
+| plugin naming convention | `openvideo-plugin-*` naming |
+| 插件框架 marketplace | official `plugin-registry.json` (versions + dependencies) |
+| one-click install | admin "Plugins → Market" |
 | market review | PR to registry |

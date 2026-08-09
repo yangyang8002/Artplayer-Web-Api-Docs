@@ -1,10 +1,10 @@
 # 插件开发指南
 
-插件系统参考 [Koishi](https://koishi.chat/zh-CN/guide/plugin/) 的设计：**插件是一个 npm 包**，包内 `main` 导出 `apply(ctx, config)`，加载时框架调用它，`ctx` 注入路由、服务、数据模型与事件总线。
+插件系统参考成熟插件框架的设计：**插件是一个 npm 包**，包内 `main` 导出 `apply(ctx, config)`，加载时框架调用它，`ctx` 注入路由、服务、数据模型与事件总线。
 
-## 与 Koishi 的对应关系
+## 与插件框架的对应
 
-| Koishi 概念 | OpenVideoAPI 对应 |
+| 框架概念 | OpenVideoAPI 对应 |
 | --- | --- |
 | `ctx.plugin(plugin, config)` | 同：嵌套插件 |
 | `ctx.model.define`（数据表） | `ctx.model.define`（动态表） |
@@ -78,7 +78,7 @@ openvideo-plugin-hello/
 ### 入口（三种导出形式）
 
 ```js
-// 1. 函数插件（Koishi 经典写法）
+// 1. 函数插件（插件框架 经典写法）
 module.exports = function (ctx, config) {
   ctx.logger.info('hello', '加载成功');
 };

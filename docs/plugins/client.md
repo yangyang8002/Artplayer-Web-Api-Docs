@@ -1,6 +1,6 @@
 # 前端扩展
 
-插件可以扩展后台与播放器前端（对应 Koishi 的控制台插件）。机制：**manifest 声明 → 服务端聚合 → 运行时注入**，插件脚本里调用全局 API 注册能力。
+插件可以扩展后台与播放器前端（对应 控制台式插件）。机制：**manifest 声明 → 服务端聚合 → 运行时注入**，插件脚本里调用全局 API 注册能力。
 
 ## 声明
 
@@ -91,9 +91,9 @@ OpenVideoPlayer.replace({
 3. 脚本执行时调用 `OpenVideoPlayer` / `OpenVideoAdmin` 全局 API 注册
 4. 播放器 boot 前检查 `replacement`：有则交给插件渲染，否则默认启动
 
-## 与 Koishi 的对应
+## 与插件框架的对应
 
-| Koishi | OpenVideoAPI |
+| 插件框架 | OpenVideoAPI |
 | --- | --- |
 | Console 插件（vue 页面/组件） | 后台 tab（原生 JS/CSS，零构建） |
 | `ctx.console` 服务 | `OpenVideoAdmin` / `OpenVideoPlayer` 全局 API |

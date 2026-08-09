@@ -1,6 +1,6 @@
 # Data Model
 
-Plugins can define their own tables via `ctx.model.define(name, schema)` (Koishi's `ctx.model`). Data migrates automatically when the main storage switches (JSON / SQLite / MySQL / PostgreSQL / MongoDB).
+Plugins can define their own tables via `ctx.model.define(name, schema)` (the framework's `ctx.model`). Data migrates automatically when the main storage switches (JSON / SQLite / MySQL / PostgreSQL / MongoDB).
 
 ## Define
 

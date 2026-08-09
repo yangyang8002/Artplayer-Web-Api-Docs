@@ -1,6 +1,6 @@
 # 数据模型
 
-插件可通过 `ctx.model.define(name, schema)` 定义自己的数据表（对应 Koishi 的 `ctx.model`），数据随主存储（JSON / SQLite / MySQL / PostgreSQL / MongoDB）**切换自动迁移**。
+插件可通过 `ctx.model.define(name, schema)` 定义自己的数据表（对应 `ctx.model`），数据随主存储（JSON / SQLite / MySQL / PostgreSQL / MongoDB）**切换自动迁移**。
 
 ## 定义表
 

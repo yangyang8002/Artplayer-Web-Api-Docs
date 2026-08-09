@@ -1,6 +1,6 @@
 # Plugin Dev Environment (OpenVideoAPI-Dev)
 
-[OpenVideoAPI-Dev](https://github.com/yangyang8002/OpenVideoAPI-Dev) is the official plugin development environment: clone it and start writing Koishi-style plugins immediately — no manual server setup, no npm publishing, and files **hot-reload automatically**.
+[OpenVideoAPI-Dev](https://github.com/yangyang8002/OpenVideoAPI-Dev) is the official plugin development environment: clone it and start writing modular plugins immediately — no manual server setup, no npm publishing, and files **hot-reload automatically**.
 
 ## Quick Start
 

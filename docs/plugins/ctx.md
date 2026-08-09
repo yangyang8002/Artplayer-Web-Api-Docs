@@ -1,6 +1,6 @@
 # ctx API 参考
 
-`ctx` 是插件上下文，在 `apply(ctx, config)` 时注入（对应 Koishi 的 ctx）。
+`ctx` 是插件上下文，在 `apply(ctx, config)` 时注入（对应 ctx）。
 
 ## 基础属性
 

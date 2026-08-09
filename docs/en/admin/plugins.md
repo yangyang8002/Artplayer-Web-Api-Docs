@@ -1,6 +1,6 @@
 # Plugins (Admin)
 
-The plugin system is designed in the **Koishi style**. The admin "Plugins" tab provides full management.
+The plugin system is designed in the **插件框架 style**. The admin "Plugins" tab provides full management.
 
 ## Install
 

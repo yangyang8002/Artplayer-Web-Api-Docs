@@ -1,6 +1,6 @@
 # 发布与插件市场
 
-开发（[Dev 环境](/guide/dev)）与验证完成后，把插件发布到 npm 并登记到官方市场（对应 Koishi 的插件市场）。
+开发（[Dev 环境](/guide/dev)）与验证完成后，把插件发布到 npm 并登记到官方市场（对应 插件市场）。
 
 ## 发布到 npm
 
@@ -50,11 +50,11 @@ npm publish
 - **npm 镜像源**：`plugin.npmRegistry`（或环境变量 `OPENVIDEO_NPM_REGISTRY`），作用于市场安装 / 插件更新 / 依赖更新 / 程序更新
 - **插件市场源**：`plugin.registry`（或 `OPENVIDEO_PLUGIN_REGISTRY`），支持 `https://` 与本地 `file://`（Dev 环境）
 
-## 与 Koishi 的对应
+## 与插件框架的对应
 
-| Koishi | OpenVideoAPI |
+| 插件框架 | OpenVideoAPI |
 | --- | --- |
-| `koishi-plugin-*` 命名 | `openvideo-plugin-*` 命名 |
-| Koishi 市场（registry.npmjs.org 搜索） | 官方 `plugin-registry.json`（版本 + 依赖） |
-| `koishi add` 安装 | 后台「插件管理 → 市场」 |
+| 插件命名约定 | `openvideo-plugin-*` 命名 |
+| 插件市场（registry.npmjs.org 搜索） | 官方 `plugin-registry.json`（版本 + 依赖） |
+| 市场一键安装 | 后台「插件管理 → 市场」 |
 | 提交市场审核 | PR 登记 registry |

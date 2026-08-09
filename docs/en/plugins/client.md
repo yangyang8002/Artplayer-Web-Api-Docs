@@ -1,6 +1,6 @@
 # Client Extensions
 
-Plugins can extend the admin and player frontends (Koishi's console plugins). Mechanism: **manifest declaration → server aggregation → runtime injection**; plugin scripts register capabilities via global APIs.
+Plugins can extend the admin and player frontends (the framework's console plugins). Mechanism: **manifest declaration → server aggregation → runtime injection**; plugin scripts register capabilities via global APIs.
 
 ## Declaration
 
@@ -83,9 +83,9 @@ OpenVideoPlayer.replace({
 3. Scripts register via the `OpenVideoPlayer` / `OpenVideoAdmin` globals
 4. Before player boot, `replacement` is checked: plugin takes over, otherwise the default player starts
 
-## Koishi Mapping
+## Framework Mapping
 
-| Koishi | OpenVideoAPI |
+| 插件框架 | OpenVideoAPI |
 | --- | --- |
 | Console plugins (vue pages/components) | admin tabs (plain JS/CSS, zero build) |
 | `ctx.console` service | `OpenVideoAdmin` / `OpenVideoPlayer` globals |

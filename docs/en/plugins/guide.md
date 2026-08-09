@@ -1,10 +1,10 @@
 # Plugin Guide
 
-The plugin system is modeled after [Koishi](https://koishi.chat/en-US/guide/plugin/): a plugin is an **npm package** whose `main` exports `apply(ctx, config)`; the framework calls it on load and injects routing, services, data models and an event bus via `ctx`.
+The plugin system is modeled after mature plugin frameworks: a plugin is an **npm package** whose `main` exports `apply(ctx, config)`; the framework calls it on load and injects routing, services, data models and an event bus via `ctx`.
 
-## Koishi Mapping
+## Framework Mapping
 
-| Koishi concept | OpenVideoAPI equivalent |
+| Framework concept | OpenVideoAPI equivalent |
 | --- | --- |
 | `ctx.plugin(plugin, config)` | same (nested plugins) |
 | `ctx.model.define` | `ctx.model.define` (dynamic tables) |

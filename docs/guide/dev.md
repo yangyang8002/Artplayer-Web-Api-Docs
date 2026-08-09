@@ -1,6 +1,6 @@
 # 插件开发环境（OpenVideoAPI-Dev）
 
-[OpenVideoAPI-Dev](https://github.com/yangyang8002/OpenVideoAPI-Dev) 是官方插件开发环境仓库：克隆后即可开始开发 Koishi 风格的插件——无需手动搭服务、无需发布 npm 包，改代码**自动热重载**。
+[OpenVideoAPI-Dev](https://github.com/yangyang8002/OpenVideoAPI-Dev) 是官方插件开发环境仓库：克隆后即可开始开发 插件——无需手动搭服务、无需发布 npm 包，改代码**自动热重载**。
 
 ## 快速开始
 

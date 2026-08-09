@@ -26,7 +26,7 @@ Supports `get` / `post` / `put` / `delete` / `patch` / `use`. Routes of hot-relo
 ## ctx.store / ctx.model
 
 - `ctx.store`: data store (danmaku / videos / subtitles / kv ...)
-- `ctx.model`: **dynamic tables** (Koishi-style `ctx.model.define`):
+- `ctx.model`: **dynamic tables** (modular `ctx.model.define`):
 
 ```js
 const notes = ctx.model.define('my_notes', {

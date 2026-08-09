@@ -31,7 +31,7 @@ features:
     details: JSON / SQLite / MySQL / MariaDB / PostgreSQL / MongoDB with automatic data migration
   - icon: 🧩
     title: Plugin System
-    details: Koishi-style plugins via upload / URL / npm; ctx injects router, store and event bus
+    details: modular plugins via upload / URL / npm; ctx injects router, store and event bus
   - icon: 🌐
     title: i18n
     details: Admin & player support Simplified Chinese, Traditional Chinese, Classical Chinese, English, Japanese, French
