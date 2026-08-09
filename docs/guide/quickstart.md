@@ -2,7 +2,7 @@
 
 <span class="badge">v26.8.11</span><span class="badge">Node ≥ 18</span><span class="badge">MIT</span>
 
-ArtPlayer Web API 是一个自托管、零构建的弹幕视频播放器 + Web 管理后台。支持 PoW 防火墙、多数据库、插件系统、多语言与多主题。
+OpenVideoAPI 是一个自托管、零构建的弹幕视频播放器 + Web 管理后台。支持 PoW 防火墙、多数据库、插件系统、多语言与多主题。
 
 ## 方式一：npm 安装（推荐）
 

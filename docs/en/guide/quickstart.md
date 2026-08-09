@@ -2,7 +2,7 @@
 
 <span class="badge">v26.8.11</span><span class="badge">Node ≥ 18</span><span class="badge">MIT</span>
 
-ArtPlayer Web API is a self-hosted, zero-build danmaku video player with a web admin panel: PoW firewall, multi-database, plugin system, i18n and themes.
+OpenVideoAPI is a self-hosted, zero-build danmaku video player with a web admin panel: PoW firewall, multi-database, plugin system, i18n and themes.
 
 ## Option 1: npm
 

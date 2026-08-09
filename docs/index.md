@@ -2,12 +2,12 @@
 layout: home
 
 hero:
-  name: ArtPlayer Web API
+  name: OpenVideoAPI
   text: 自托管弹幕视频播放器 + Web 管理后台
   tagline: 零构建 · 开箱即用 · PoW 防火墙 · 多数据库 · 插件系统
   image:
     src: /logo.svg
-    alt: ArtPlayer Web API
+    alt: OpenVideoAPI
   actions:
     - theme: brand
       text: 快速开始

@@ -2,12 +2,12 @@
 layout: home
 
 hero:
-  name: ArtPlayer Web API
+  name: OpenVideoAPI
   text: Self-hosted danmaku video player + Web admin
   tagline: Zero-build · Plug & play · PoW firewall · Multi-database · Plugin system
   image:
     src: /logo.svg
-    alt: ArtPlayer Web API
+    alt: OpenVideoAPI
   actions:
     - theme: brand
       text: Quick Start

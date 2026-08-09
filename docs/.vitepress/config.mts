@@ -2,7 +2,7 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  title: 'ArtPlayer Web API Docs',
+  title: 'OpenVideoAPI Docs',
   description: '自托管弹幕视频播放器 + Web 管理后台 官方文档',
   lang: 'zh-CN',
   base: '/',
