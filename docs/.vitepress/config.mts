@@ -142,7 +142,8 @@ export default defineConfig({
               items: [
                 { text: 'Overview', link: '/en/api/reference' },
                 { text: 'Danmaku API', link: '/en/api/danmaku' },
-                { text: 'Admin API', link: '/en/api/admin' }
+                { text: 'Admin API', link: '/en/api/admin' },
+                { text: 'Video / Subtitle API', link: '/en/api/video-subtitle' }
               ]
             }
           ],
