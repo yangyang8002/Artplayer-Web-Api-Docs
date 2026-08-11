@@ -26,6 +26,14 @@ http://localhost:1919/player/?url=https://example.com/video.mp4
 - Auto-detection of sibling subtitle files (srt/vtt/ass/ssa) with multi-language matching (e.g. `video.zh.vtt`)
 - The admin subtitle library can be applied to videos; remote subtitles can be localized (downloaded) to the server
 
+## OpenList / AList Videos
+
+After configuring an OpenList (AList-compatible) cloud instance in the Backups tab, just paste the instance link to play:
+
+- The player asks the server (`/api/video/resolve-link`) to resolve the **cloud direct link** (secondary URL) via the instance API and plays it
+- The **video ID and subtitle detection stay keyed to the original OpenList link**: signed / expiring direct links never affect danmaku or same-folder subtitle associations
+- If resolution fails, the original link is played as-is; links from unconfigured instances are unaffected
+
 ## Quick Codes
 
 In the admin "Videos" tab, generate embed codes (HTML / Markdown / JS / direct link) for any video.

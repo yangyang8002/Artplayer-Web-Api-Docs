@@ -31,6 +31,24 @@ GET /api/subtitle/detect?url={视频地址}
 
 自动检测视频同目录的字幕文件（.srt / .vtt / .ass / .ssa / .webvtt），返回多语言候选列表（如 `视频名.zh.vtt`、`视频名.en.vtt`）。
 
+对于已配置 OpenList（AList 兼容）云端实例的 `/d/` 链接，还会通过实例 API 检测**云盘同目录**的字幕文件。
+
+## OpenList 直链解析
+
+```
+GET /api/video/resolve-link?url={OpenList链接}
+```
+
+匹配已配置的 OpenList 实例时，调用实例 API（`/api/fs/get`）返回云盘直链（二次地址）：
+
+```json
+{ "code": 0, "data": { "url": "https://cdn.../video.mp4?sign=...", "matched": true, "original": "https://实例/d/video.mp4" } }
+```
+
+- 未匹配实例时返回 `matched: false` 与原链接（播放器原样播放）
+- 解析失败返回 502，播放器回退原始链接
+- 播放器用它播放直链，但 **vid 与字幕检测仍以原始链接为准**（直链签名变化不影响弹幕/字幕关联）
+
 ## 字幕内容
 
 ```
