@@ -124,11 +124,15 @@ export default defineConfig({
               items: [
                 { text: 'Overview', link: '/en/admin/overview' },
                 { text: 'Console', link: '/en/admin/console' },
+                { text: 'Danmaku / Videos / Subtitles', link: '/en/admin/content' },
                 { text: 'Plugins', link: '/en/admin/plugins' },
                 { text: 'Dependencies', link: '/en/admin/deps' },
+                { text: 'Server Config', link: '/en/admin/config' },
                 { text: 'Database', link: '/en/admin/database' },
                 { text: 'Backups', link: '/en/admin/backup' },
-                { text: 'Security', link: '/en/admin/security' }
+                { text: 'Security', link: '/en/admin/security' },
+                { text: 'API Management', link: '/en/admin/api' },
+                { text: 'Theme System', link: '/en/admin/themes' }
               ]
             }
           ],
