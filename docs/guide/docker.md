@@ -35,7 +35,7 @@ services:
 | Tag | 说明 |
 | --- | --- |
 | `latest` | 最新版本 |
-| `26.8.11` | 指定版本（tag 与 npm 包版本一致） |
+| `26.8.14` | 指定版本（tag 与 npm 包版本一致） |
 | `26.8.x` | 大版本系列 |
 
 > 国内加速镜像：`fast.fumor.top/yangyang8002/open-video-api`（快速通道）、`ghcr.nju.edu.cn/yangyang8002/open-video-api`（NJU 镜像）

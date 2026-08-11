@@ -1,6 +1,6 @@
 # 快速开始
 
-<span class="badge">v26.8.11</span><span class="badge">Node ≥ 18</span><span class="badge">MIT</span>
+<span class="badge">v26.8.14</span><span class="badge">Node ≥ 18</span><span class="badge">MIT</span>
 
 OpenVideoAPI 是一个自托管、零构建的弹幕视频播放器 + Web 管理后台。支持 PoW 防火墙、多数据库、插件系统、多语言与多主题。
 

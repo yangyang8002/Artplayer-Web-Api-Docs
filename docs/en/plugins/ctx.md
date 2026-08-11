@@ -8,7 +8,7 @@
 | --- | --- |
 | `ctx.name` | plugin display name |
 | `ctx.config` | current plugin config (updated on hot reload) |
-| `ctx.version` | server version (e.g. `26.8.11`) |
+| `ctx.version` | server version (e.g. `26.8.14`) |
 | `ctx.log(msg)` | log with plugin name prefix |
 
 ## ctx.router

@@ -8,7 +8,7 @@
 | --- | --- |
 | `ctx.name` | 插件显示名 |
 | `ctx.config` | 当前插件配置（后台表单保存后热重载更新） |
-| `ctx.version` | 服务端版本号（如 `26.8.11`） |
+| `ctx.version` | 服务端版本号（如 `26.8.14`） |
 | `ctx.log(msg)` | 带插件名前缀的日志输出 |
 
 ## ctx.router（Express 路由）

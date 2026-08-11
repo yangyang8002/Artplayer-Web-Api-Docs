@@ -31,7 +31,7 @@ services:
 | Tag | Description |
 | --- | --- |
 | `latest` | latest version |
-| `26.8.11` | pinned version (matches npm package version) |
+| `26.8.14` | pinned version (matches npm package version) |
 
 > China mirrors: `fast.fumor.top/yangyang8002/open-video-api`, `ghcr.nju.edu.cn/yangyang8002/open-video-api`
 
